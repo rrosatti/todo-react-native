@@ -8,11 +8,20 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
 
 class AddTodo extends Component {
 
-  addTodo = () => {
-    console.log('addTodo');
+  constructor() {
+    super();
+    this.state = {
+      text: '',
+    };
+  }
+
+  addTodo = (text) => {
+    this.props.dispatch({type: 'ADD_TODO', text });
+    this.setState({ text: '' });
   }
 
   render() {
@@ -21,8 +30,10 @@ class AddTodo extends Component {
           <TextInput
             placeholder='Eg. Create new Video'
             style={styles.textInput}
+            value={this.state.text}
+            onChangeText={(text)  => this.setState({ text })}
           />
-          <TouchableOpacity onPress={this.addTodo}>
+          <TouchableOpacity onPress={() => this.addTodo(this.state.text)}>
             <View style={styles.addTodoContainer}>
               <Icon
                 name="md-add"
@@ -35,7 +46,7 @@ class AddTodo extends Component {
   }
 }
 
-export default AddTodo;
+export default connect()(AddTodo);
 
 const styles = StyleSheet.create({
   todoRow: {

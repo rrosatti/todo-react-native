@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import AddTodo from './containers/AddTodo';
+import VisibleTodos from './containers/VisibleTodos';
 
 class TodoApp extends Component {
 
@@ -21,6 +22,9 @@ class TodoApp extends Component {
     return (
         <View style={styles.container}>
           <AddTodo />
+          <View>
+            <VisibleTodos />
+          </View>
         </View>
     );
   }
